@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PahadiHaat - Uttarakhand's Local Products Marketplace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --secondary: #7cb342;
+            --accent: #ff9800;
+            --light: #f1f8e9;
+            --dark: #1b5e20;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M10,10 C30,30 50,20 70,40 C90,60 80,80 60,90 C40,100 20,80 10,60 Z" fill="none" stroke="rgba(46, 125, 50, 0.03)" stroke-width="1"/></svg>');
+            background-attachment: fixed;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1581579437189-64af9b869729?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .product-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .product-img {
+            height: 200px;
+            object-fit: cover;
+            background-color: #f8f9fa;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark);
+            border-color: var(--dark);
+        }
+        
+        .category-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .section-title {
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .how-it-works-step {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+        }
+        
+        .contact-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .azure-integration {
+            background-color: #0078d4;
+            color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-mountain me-2"></i> PahadiHaat
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#products">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light ms-2" href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Connecting Uttarakhand's Villages to You</h1>
+            <p class="lead mb-4">Discover authentic homemade products directly from the heart of the Himalayas</p>
+            <a href="#products" class="btn btn-lg btn-primary me-2">Shop Now</a>
+            <a href="#" class="btn btn-lg btn-outline-light" data-bs-toggle="modal" data-bs-target="#registerModal">Sell Products</a>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="products" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            
+            <div class="row">
+                <!-- Product Cards -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card product-card">
+                        <span class="category-badge">Paneer</span>
+                        <img src="https://images.unsplash.com/photo-1611250503332-507fa0c965d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Fresh Paneer">
+                        <div class="card-body">
+                            <h5 class="card-title">Fresh Homemade Paneer</h5>
+                            <p class="text-muted">From Rudraprayag Village</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-primary">₹ 250/kg</span>
+                                <button class="btn btn-sm btn-primary">Contact Seller</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card product-card">
+                        <span class="category-badge">Honey</span>
+                        <img src="https://images.unsplash.com/photo-1558645830-e2f7174073a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Organic Honey">
+                        <div class="card-body">
+                            <h5 class="card-title">Pure Wild Honey</h5>
+                            <p class="text-muted">From Tehri Forest Area</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-primary">₹ 500/kg</span>
+                                <button class="btn btn-sm btn-primary">Contact Seller</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card product-card">
+                        <span class="category-badge">Ghee</span>
+                        <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Pure Ghee">
+                        <div class="card-body">
+                            <h5 class="card-title">A2 Bilona Ghee</h5>
+                            <p class="text-muted">From Almora Village</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-primary">₹ 1200/kg</span>
+                                <button class="btn btn-sm btn-primary">Contact Seller</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card product-card">
+                        <span class="category-badge">Rajma</span>
+                        <img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Munsiyari Rajma">
+                        <div class="card-body">
+                            <h5 class="card-title">Munsiyari Rajma</h5>
+                            <p class="text-muted">From Munsiyari Village</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-primary">₹ 180/kg</span>
+                                <button class="btn btn-sm btn-primary">Contact Seller</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-primary">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">How PahadiHaat Works</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="how-it-works-step">
+                        <div class="step-number">1</div>
+                        <h4>Villagers List Products</h4>
+                        <p>Local producers create listings with photos and details of their homemade products.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="how-it-works-step">
+                        <div class="step-number">2</div>
+                        <h4>Buyers Browse & Connect</h4>
+                        <p>Customers browse products and initiate contact through our secure messaging system.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="how-it-works-step">
+                        <div class="step-number">3</div>
+                        <h4>Secure Communication</h4>
+                        <p>Buyers and sellers communicate without sharing personal contact details until both agree.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Azure Integration Section -->
+    <section class="azure-integration">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2><i class="fab fa-microsoft me-3"></i> Powered by Microsoft Azure</h2>
+                    <p class="lead">Your seller data is securely stored in Azure Cloud Services</p>
+                    <p>We use Azure SQL Database to store seller information and Azure Blob Storage for product images, ensuring reliable and scalable performance.</p>
+                    <a href="https://portal.azure.com" target="_blank" class="btn btn-light mt-2">Manage in Azure Portal</a>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fab fa-microsoft fa-5x"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Your Name</label>
+                                        <input type="text" class="form-control" id="name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5><i class="fas fa-mountain me-2"></i> PahadiHaat</h5>
+                    <p>Connecting Uttarakhand's rural producers with conscious consumers across India.</p>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="#products" class="text-white text-decoration-none">Products</a></li>
+                        <li><a href="#how-it-works" class="text-white text-decoration-none">How It Works</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Pithoragarh, Uttarakhand</li>
+                        <li><i class="fas fa-phone me-2"></i> +91 8886599220</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@pahadihaat.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Follow Us</h5>
+                    <div class="d-flex">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-2x"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-whatsapp fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-0 mb-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 PahadiHaat. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Register as a Seller</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="sellerForm">
+                        <div class="mb-3">
+                            <label for="sellerName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="sellerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sellerPhone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="sellerPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sellerDistrict" class="form-label">District</label>
+                            <select class="form-select" id="sellerDistrict" required>
+                                <option value="" selected disabled>Select District</option>
+                                <option value="almora">Almora</option>
+                                <option value="pithoragarh">Pithoragarh</option>
+                                <option value="nainital">Nainital</option>
+                                <option value="tehri">Tehri Garhwal</option>
+                                <option value="dehradun">Dehradun</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sellerVillage" class="form-label">Village Name</label>
+                            <input type="text" class="form-control" id="sellerVillage" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Products You Want to Sell</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="paneer" id="productPaneer">
+                                <label class="form-check-label" for="productPaneer">Paneer</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="ghee" id="productGhee">
+                                <label class="form-check-label" for="productGhee">Ghee</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="honey" id="productHoney">
+                                <label class="form-check-label" for="productHoney">Honey</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="rajma" id="productRajma">
+                                <label class="form-check-label" for="productRajma">Rajma</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Register Now</button>
+                    </form>
+                    <div class="alert alert-success mt-3" id="successMessage" style="display: none;">
+                        <i class="fas fa-check-circle me-2"></i> Thank you for your registration! Our team will contact you within 24 hours.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple form handling
+        document.addEventListener('DOMContentLoaded', function() {
+            // Seller registration form
+            const sellerForm = document.getElementById('sellerForm');
+            if (sellerForm) {
+                sellerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('sellerName').value;
+                    const phone = document.getElementById('sellerPhone').value;
+                    const district = document.getElementById('sellerDistrict').value;
+                    const village = document.getElementById('sellerVillage').value;
+                    
+                    // Get selected products
+                    const products = [];
+                    if (document.getElementById('productPaneer').checked) products.push('Paneer');
+                    if (document.getElementById('productGhee').checked) products.push('Ghee');
+                    if (document.getElementById('productHoney').checked) products.push('Honey');
+                    if (document.getElementById('productRajma').checked) products.push('Rajma');
+                    
+                    // In a real application, this data would be sent to Azure
+                    console.log('Seller registration:', { name, phone, district, village, products });
+                    
+                    // Show success message
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Reset form
+                    sellerForm.reset();
+                    
+                    // Close modal after 3 seconds
+                    setTimeout(() => {
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+                        modal.hide();
+                    }, 3000);
+                });
+            }
+            
+            // Contact form
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // In a real application, this data would be sent to Azure
+                    console.log('Contact form submission:', { name, email, subject, message });
+                    
+                    // Show alert
+                    alert('Thank you for your message! We will contact you soon.');
+                    
+                    // Reset form
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
