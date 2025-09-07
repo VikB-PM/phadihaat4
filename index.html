@@ -19,8 +19,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
             color: #333;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M10,10 C30,30 50,20 70,40 C90,60 80,80 60,90 C40,100 20,80 10,60 Z" fill="none" stroke="rgba(46, 125, 50, 0.03)" stroke-width="1"/></svg>');
-            background-attachment: fixed;
         }
         
         .navbar {
@@ -34,6 +32,25 @@
             color: white;
             padding: 100px 0;
             text-align: center;
+        }
+        
+        .section-title {
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
         }
         
         .product-card {
@@ -66,40 +83,20 @@
             border-color: var(--dark);
         }
         
-        .category-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: var(--accent);
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
             color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
         }
         
-        .section-title {
-            color: var(--dark);
-            position: relative;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: var(--accent);
-        }
-        
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 40px 0 20px;
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
         }
         
         .how-it-works-step {
@@ -124,6 +121,23 @@
             font-weight: bold;
         }
         
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .social-icon {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .social-icon:hover {
+            color: var(--accent);
+        }
+        
         .contact-form {
             background-color: white;
             border-radius: 10px;
@@ -131,12 +145,78 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
-        .azure-integration {
+        .category-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .seller-reg-img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        /* New styles for the enhanced registration form */
+        .location-section {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-section-title {
+            color: var(--dark);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .whatsapp-option {
+            background-color: #f0fff0;
+            border-left: 4px solid #25D366;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        
+        /* Azure integration badge */
+        .azure-badge {
             background-color: #0078d4;
             color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        /* Azure panel styling */
+        .azure-panel {
+            background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+            color: white;
             border-radius: 10px;
-            padding: 30px;
-            margin: 30px 0;
+            padding: 25px;
+            margin: 40px 0;
         }
     </style>
 </head>
@@ -145,7 +225,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <i class="fas fa-mountain me-2"></i> PahadiHaat
+                <i class="fas fa-mountain me-2"></i> PahadiHaat <span class="azure-badge">Azure Powered</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -159,13 +239,19 @@
                         <a class="nav-link" href="#products">Products</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sell">Sell</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-light ms-2" href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a>
+                        <a class="btn btn-outline-light ms-2" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
                     </li>
                 </ul>
             </div>
@@ -182,20 +268,47 @@
         </div>
     </section>
 
+    <!-- Azure Integration Panel -->
+    <section class="azure-panel">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2><i class="fab fa-microsoft me-3"></i> Powered by Microsoft Azure</h2>
+                    <p class="lead">Your data is securely stored using Azure's always-free services</p>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-database me-2"></i> Azure Cosmos DB</h5>
+                            <p>Free tier: 1000 RU/s + 25 GB storage</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-server me-2"></i> Azure Static Web Apps</h5>
+                            <p>Free hosting with automatic deployment</p>
+                        </div>
+                    </div>
+                    <a href="https://portal.azure.com" target="_blank" class="btn btn-light mt-3">Manage in Azure Portal</a>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fab fa-microsoft fa-5x"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Featured Products -->
     <section id="products" class="py-5">
         <div class="container">
             <h2 class="section-title">Featured Products</h2>
             
             <div class="row">
-                <!-- Product Cards -->
+                <!-- Product 1 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="card product-card">
                         <span class="category-badge">Paneer</span>
-                        <img src="https://images.unsplash.com/photo-1611250503332-507fa0c965d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Fresh Paneer">
+                        <img src="https://images.unsplash.com/photo-1611250503332-507fa0c965d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Fresh Paneer" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80'">
                         <div class="card-body">
                             <h5 class="card-title">Fresh Homemade Paneer</h5>
                             <p class="text-muted">From Rudraprayag Village</p>
+                            <p class="card-text">Handmade fresh paneer from grass-fed cows. Prepared using traditional methods.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="fw-bold text-primary">₹ 250/kg</span>
                                 <button class="btn btn-sm btn-primary">Contact Seller</button>
@@ -204,13 +317,15 @@
                     </div>
                 </div>
                 
+                <!-- Product 2 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="card product-card">
                         <span class="category-badge">Honey</span>
-                        <img src="https://images.unsplash.com/photo-1558645830-e2f7174073a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Organic Honey">
+                        <img src="https://images.unsplash.com/photo-1558645830-e2f7174073a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Organic Honey" onerror="this.src='https://images.unsplash.com/photo-1587049633312-d628ae50a8ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80'">
                         <div class="card-body">
                             <h5 class="card-title">Pure Wild Honey</h5>
                             <p class="text-muted">From Tehri Forest Area</p>
+                            <p class="card-text">100% pure wild honey collected from the deep forests of Tehri. No additives.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="fw-bold text-primary">₹ 500/kg</span>
                                 <button class="btn btn-sm btn-primary">Contact Seller</button>
@@ -219,13 +334,15 @@
                     </div>
                 </div>
                 
+                <!-- Product 3 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="card product-card">
                         <span class="category-badge">Ghee</span>
-                        <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Pure Ghee">
+                        <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Pure Ghee" onerror="this.src='https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80'">
                         <div class="card-body">
                             <h5 class="card-title">A2 Bilona Ghee</h5>
                             <p class="text-muted">From Almora Village</p>
+                            <p class="card-text">Traditional bilona method prepared ghee from indigenous cow's milk. Rich in flavor.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="fw-bold text-primary">₹ 1200/kg</span>
                                 <button class="btn btn-sm btn-primary">Contact Seller</button>
@@ -234,15 +351,17 @@
                     </div>
                 </div>
                 
+                <!-- Product 4 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="card product-card">
-                        <span class="category-badge">Rajma</span>
-                        <img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Munsiyari Rajma">
+                        <span class="category-badge">Spices</span>
+                        <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Organic Spices" onerror="this.src='https://images.unsplash.com/photo-1550675897-2d6a8b430c7f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80'">
                         <div class="card-body">
-                            <h5 class="card-title">Munsiyari Rajma</h5>
-                            <p class="text-muted">From Munsiyari Village</p>
+                            <h5 class="card-title">Organic Mountain Spices</h5>
+                            <p class="text-muted">From Bageshwar Farms</p>
+                            <p class="card-text">Collection of organic spices grown without chemicals in the Himalayan foothills.</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="fw-bold text-primary">₹ 180/kg</span>
+                                <span class="fw-bold text-primary">₹ 150/pack</span>
                                 <button class="btn btn-sm btn-primary">Contact Seller</button>
                             </div>
                         </div>
@@ -289,25 +408,68 @@
         </div>
     </section>
 
-    <!-- Azure Integration Section -->
-    <section class="azure-integration">
+    <!-- Sell Products -->
+    <section id="sell" class="py-5">
         <div class="container">
+            <h2 class="section-title">Sell Your Products</h2>
+            
             <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h2><i class="fab fa-microsoft me-3"></i> Powered by Microsoft Azure</h2>
-                    <p class="lead">Your seller data is securely stored in Azure Cloud Services</p>
-                    <p>We use Azure SQL Database to store seller information and Azure Blob Storage for product images, ensuring reliable and scalable performance.</p>
-                    <a href="https://portal.azure.com" target="_blank" class="btn btn-light mt-2">Manage in Azure Portal</a>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1560472355-536de3962603?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Village Producer" class="img-fluid rounded">
                 </div>
-                <div class="col-md-4 text-center">
-                    <i class="fab fa-microsoft fa-5x"></i>
+                
+                <div class="col-lg-6">
+                    <div class="ps-lg-4 mt-4 mt-lg-0">
+                        <h3 class="mb-4">Reach Customers Across Uttarakhand</h3>
+                        <div class="d-flex mb-3">
+                            <div class="me-4">
+                                <i class="fas fa-upload feature-icon"></i>
+                            </div>
+                            <div>
+                                <h5>Easy Listing Process</h5>
+                                <p>Create product listings with photos and descriptions in just a few minutes.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="me-4">
+                                <i class="fas fa-shield-alt feature-icon"></i>
+                            </div>
+                            <div>
+                                <h5>Privacy Protection</h5>
+                                <p>Your contact information remains hidden until you choose to share it.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="me-4">
+                                <i class="fas fa-video feature-icon"></i>
+                            </div>
+                            <div>
+                                <h5>Share Videos</h5>
+                                <p>Show customers your cattle, goats, and production process with short videos.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="me-4">
+                                <i class="fas fa-rupee-sign feature-icon"></i>
+                            </div>
+                            <div>
+                                <h5>No Commission Fees</h5>
+                                <p>We don't charge any commission on your sales. Connect directly with buyers.</p>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#registerModal">Register as Seller</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Form -->
-    <section id="contact" class="py-5">
+    <section id="contact" class="py-5 bg-light">
         <div class="container">
             <h2 class="section-title">Contact Us</h2>
             
@@ -358,89 +520,237 @@
                     <ul class="list-unstyled">
                         <li><a href="#" class="text-white text-decoration-none">Home</a></li>
                         <li><a href="#products" class="text-white text-decoration-none">Products</a></li>
-                        <li><a href="#how-it-works" class="text-white text-decoration-none">How It Works</a></li>
+                        <li><a href="about.html" class="text-white text-decoration-none">About Us</a></li>
+                        <li><a href="#sell" class="text-white text-decoration-none">Sell</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
                     <h5>Contact Info</h5>
                     <ul class="list-unstyled">
-                        <li><i class="fas fa-map-marker-alt me-2"></i> Pithoragarh, Uttarakhand</li>
-                        <li><i class="fas fa-phone me-2"></i> +91 8886599220</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Dehradun, Uttarakhand</li>
+                        <li><i class="fas fa-phone me-2"></i> +91 9876543210</li>
                         <li><i class="fas fa-envelope me-2"></i> info@pahadihaat.com</li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
                     <h5>Follow Us</h5>
                     <div class="d-flex">
-                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-2x"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-2x"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-whatsapp fa-2x"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
             <hr class="mt-0 mb-4">
             <div class="text-center">
-                <p class="mb-0">&copy; 2023 PahadiHaat. All rights reserved.</p>
+                <p class="mb-0">&copy; 2023 PahadiHaat. All rights reserved. <span class="azure-badge">Azure Powered</span></p>
             </div>
         </div>
     </footer>
 
     <!-- Register Modal -->
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="registerModalLabel">Register as a Seller</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="https://images.unsplash.com/photo-1560472355-536de3962603?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Seller Registration" class="seller-reg-img">
+                            <h4>Join Our Community of Sellers</h4>
+                            <p>Reach customers across Uttarakhand and beyond with your homemade products.</p>
+                            <ul>
+                                <li>No commission fees</li>
+                                <li>Secure communication system</li>
+                                <li>Share videos of your products</li>
+                                <li>Support from our team</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <form id="sellerRegistrationForm">
+                                <div class="mb-3">
+                                    <label for="fullName" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="fullName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email">
+                                    <div class="form-text">Optional - for order notifications</div>
+                                </div>
+                                
+                                <div class="location-section mb-3">
+                                    <h6 class="modal-section-title">Your Location Details</h6>
+                                    
+                                    <div class="mb-2">
+                                        <label for="district" class="form-label">District *</label>
+                                        <select class="form-select" id="district" required>
+                                            <option value="" selected disabled>Select District</option>
+                                            <option value="almora">Almora</option>
+                                            <option value="bageshwar">Bageshwar</option>
+                                            <option value="chamoli">Chamoli</option>
+                                            <option value="champawat">Champawat</option>
+                                            <option value="dehradun">Dehradun</option>
+                                            <option value="haridwar">Haridwar</option>
+                                            <option value="nainital">Nainital</option>
+                                            <option value="pauri">Pauri Garhwal</option>
+                                            <option value="pithoragarh">Pithoragarh</option>
+                                            <option value="rudraprayag">Rudraprayag</option>
+                                            <option value="tehri">Tehri Garhwal</option>
+                                            <option value="udhamsinghnagar">Udham Singh Nagar</option>
+                                            <option value="uttarkashi">Uttarkashi</option>
+                                            <option value="other">Other (please specify)</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-2" id="otherDistrictContainer" style="display: none;">
+                                        <label for="otherDistrict" class="form-label">Specify District</label>
+                                        <input type="text" class="form-control" id="otherDistrict">
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <label for="tehsil" class="form-label">Tehsil/Block *</label>
+                                        <select class="form-select" id="tehsil" required>
+                                            <option value="" selected disabled>Select Tehsil/Block</option>
+                                            <!-- Options will be loaded based on district selection -->
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-2" id="otherTehsilContainer" style="display: none;">
+                                        <label for="otherTehsil" class="form-label">Specify Tehsil/Block</label>
+                                        <input type="text" class="form-control" id="otherTehsil">
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <label for="village" class="form-label">Village *</label>
+                                        <select class="form-select" id="village" required>
+                                            <option value="" selected disabled>Select Village</option>
+                                            <!-- Options will be loaded based on tehsil selection -->
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-2" id="otherVillageContainer" style="display: none;">
+                                        <label for="otherVillage" class="form-label">Specify Village</label>
+                                        <input type="text" class="form-control" id="otherVillage">
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <label for="pincode" class="form-label">PIN Code</label>
+                                        <input type="text" class="form-control" id="pincode">
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Products You Want to Sell *</label>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="paneer" id="productPaneer">
+                                                <label class="form-check-label" for="productPaneer">Paneer</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="ghee" id="productGhee">
+                                                <label class="form-check-label" for="productGhee">Ghee</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="honey" id="productHoney">
+                                                <label class="form-check-label" for="productHoney">Honey</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="milk" id="productMilk">
+                                                <label class="form-check-label" for="productMilk">Milk Products</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="spices" id="productSpices">
+                                                <label class="form-check-label" for="productSpices">Spices</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="pickles" id="productPickles">
+                                                <label class="form-check-label" for="productPickles">Pickles</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="other" id="productOther">
+                                                <label class="form-check-label" for="productOther">Other</label>
+                                            </div>
+                                            <div class="mt-1" id="otherProductContainer" style="display: none;">
+                                                <input type="text" class="form-control form-control-sm" id="otherProduct" placeholder="Specify other products">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Would you like to share a video? *</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="videoOption" id="videoYes" value="yes" required>
+                                        <label class="form-check-label" for="videoYes">Yes, I will share via WhatsApp</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="videoOption" id="videoNo" value="no">
+                                        <label class="form-check-label" for="videoNo">No, not now</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="whatsapp-option">
+                                    <p class="mb-1 small"><i class="fab fa-whatsapp me-1"></i> <strong>WhatsApp Video Instructions</strong></p>
+                                    <p class="mb-1 small">1. Record a short video (15-30 seconds)</p>
+                                    <p class="mb-1 small">2. Send to: <strong>+91 9876543210</strong></p>
+                                    <p class="mb-0 small">3. Mention your name and village</p>
+                                </div>
+                                
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="terms" required>
+                                    <label class="form-check-label" for="terms">I agree to the terms and conditions *</label>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary w-100">Register Now</button>
+                            </form>
+                            
+                            <div class="alert alert-success mt-3" id="successMessage" style="display: none;">
+                                <i class="fas fa-check-circle me-2"></i> Thank you for your registration! Our team will contact you within 24 hours.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login to Your Account</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="sellerForm">
+                    <form>
                         <div class="mb-3">
-                            <label for="sellerName" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="sellerName" required>
+                            <label for="loginPhone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="loginPhone" required>
                         </div>
                         <div class="mb-3">
-                            <label for="sellerPhone" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" id="sellerPhone" required>
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="sellerDistrict" class="form-label">District</label>
-                            <select class="form-select" id="sellerDistrict" required>
-                                <option value="" selected disabled>Select District</option>
-                                <option value="almora">Almora</option>
-                                <option value="pithoragarh">Pithoragarh</option>
-                                <option value="nainital">Nainital</option>
-                                <option value="tehri">Tehri Garhwal</option>
-                                <option value="dehradun">Dehradun</option>
-                            </select>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
                         </div>
-                        <div class="mb-3">
-                            <label for="sellerVillage" class="form-label">Village Name</label>
-                            <input type="text" class="form-control" id="sellerVillage" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Products You Want to Sell</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="paneer" id="productPaneer">
-                                <label class="form-check-label" for="productPaneer">Paneer</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="ghee" id="productGhee">
-                                <label class="form-check-label" for="productGhee">Ghee</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="honey" id="productHoney">
-                                <label class="form-check-label" for="productHoney">Honey</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="rajma" id="productRajma">
-                                <label class="form-check-label" for="productRajma">Rajma</label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Register Now</button>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
                     </form>
-                    <div class="alert alert-success mt-3" id="successMessage" style="display: none;">
-                        <i class="fas fa-check-circle me-2"></i> Thank you for your registration! Our team will contact you within 24 hours.
+                    <div class="text-center mt-3">
+                        <a href="#">Forgot Password?</a> | <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Register as Seller</a>
                     </div>
                 </div>
             </div>
@@ -449,65 +759,260 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Simple form handling
+        // Location data for Uttarakhand
+        const locationData = {
+            almora: {
+                tehsils: ["Almora", "Ranikhet", "Dwarahat", "Someshwar", "Jainti", "Other"],
+                villages: {
+                    "Almora": ["Almora", "Takula", "Bhaisiya Chhana", "Dhaula Devi", "Other"],
+                    "Ranikhet": ["Ranikhet", "Chaukhutiya", "Dwarahat", "Tarikhet", "Other"],
+                    "Dwarahat": ["Dwarahat", "Bageshwar", "Kapkot", "Other"]
+                }
+            },
+            bageshwar: {
+                tehsils: ["Bageshwar", "Kapkot", "Kanda", "Other"],
+                villages: {
+                    "Bageshwar": ["Bageshwar", "Kausani", "Baijnath", "Other"],
+                    "Kapkot": ["Kapkot", "Kanda", "Other"]
+                }
+            },
+            chamoli: {
+                tehsils: ["Chamoli", "Gopeshwar", "Joshimath", "Karnaprayag", "Other"],
+                villages: {
+                    "Chamoli": ["Chamoli", "Gairsain", "Other"],
+                    "Joshimath": ["Joshimath", "Badrinath", "Other"]
+                }
+            },
+            dehradun: {
+                tehsils: ["Dehradun", "Rishikesh", "Vikasnagar", "Doiwala", "Other"],
+                villages: {
+                    "Dehradun": ["Dehradun", "Rajpur", "Premnagar", "Other"],
+                    "Rishikesh": ["Rishikesh", "Muni Ki Reti", "Other"]
+                }
+            },
+            nainital: {
+                tehsils: ["Nainital", "Haldwani", "Ramnagar", "Kaladhungi", "Other"],
+                villages: {
+                    "Nainital": ["Nainital", "Bhowali", "Bhimtal", "Other"],
+                    "Haldwani": ["Haldwani", "Kathgodam", "Other"]
+                }
+            },
+            pauri: {
+                tehsils: ["Pauri", "Srinagar", "Kotdwar", "Lansdowne", "Other"],
+                villages: {
+                    "Pauri": ["Pauri", "Khirsu", "Other"],
+                    "Srinagar": ["Srinagar", "Devprayag", "Other"]
+                }
+            },
+            pithoragarh: {
+                tehsils: ["Pithoragarh", "Dharchula", "Didihaat", "Gangolihat", "Other"],
+                villages: {
+                    "Pithoragarh": ["Pithoragarh", "Thal", "Other"],
+                    "Dharchula": ["Dharchula", "Tawaghat", "Other"]
+                }
+            },
+            tehri: {
+                tehsils: ["Tehri", "Ghansali", "Narendra Nagar", "Other"],
+                villages: {
+                    "Tehri": ["Tehri", "Chamba", "Other"],
+                    "Narendra Nagar": ["Narendra Nagar", "Kirtinagar", "Other"]
+                }
+            },
+            udhamsinghnagar: {
+                tehsils: ["Rudrapur", "Kashipur", "Kichha", "Sitarganj", "Other"],
+                villages: {
+                    "Rudrapur": ["Rudrapur", "Pantnagar", "Other"],
+                    "Kashipur": ["Kashipur", "Bazpur", "Other"]
+                }
+            },
+            uttarkashi: {
+                tehsils: ["Uttarkashi", "Bhatwari", "Dunda", "Other"],
+                villages: {
+                    "Uttarkashi": ["Uttarkashi", "Gangotri", "Other"],
+                    "Bhatwari": ["Bhatwari", "Harsil", "Other"]
+                }
+            }
+        };
+
+        // Initialize when document is ready
         document.addEventListener('DOMContentLoaded', function() {
-            // Seller registration form
-            const sellerForm = document.getElementById('sellerForm');
-            if (sellerForm) {
-                sellerForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
+            // DOM elements
+            const districtSelect = document.getElementById('district');
+            const tehsilSelect = document.getElementById('tehsil');
+            const villageSelect = document.getElementById('village');
+            const form = document.getElementById('sellerRegistrationForm');
+            const contactForm = document.getElementById('contactForm');
+            
+            if (districtSelect && tehsilSelect && villageSelect && form) {
+                // District change event
+                districtSelect.addEventListener('change', function() {
+                    const district = this.value;
                     
-                    // Get form values
-                    const name = document.getElementById('sellerName').value;
-                    const phone = document.getElementById('sellerPhone').value;
-                    const district = document.getElementById('sellerDistrict').value;
-                    const village = document.getElementById('sellerVillage').value;
+                    // Show/hide other district input
+                    document.getElementById('otherDistrictContainer').style.display = 
+                        district === 'other' ? 'block' : 'none';
+                    
+                    // Clear previous tehsils and villages
+                    tehsilSelect.innerHTML = '<option value="" selected disabled>Select Tehsil/Block</option>';
+                    villageSelect.innerHTML = '<option value="" selected disabled>Select Village</option>';
+                    
+                    // Add tehsils based on district
+                    if (district !== 'other' && locationData[district]) {
+                        locationData[district].tehsils.forEach(tehsil => {
+                            const option = document.createElement('option');
+                            option.value = tehsil.toLowerCase();
+                            option.textContent = tehsil;
+                            tehsilSelect.appendChild(option);
+                        });
+                    }
+                });
+
+                // Tehsil change event
+                tehsilSelect.addEventListener('change', function() {
+                    const tehsil = this.value;
+                    const district = districtSelect.value;
+                    
+                    // Show/hide other tehsil input
+                    document.getElementById('otherTehsilContainer').style.display = 
+                        tehsil === 'other' ? 'block' : 'none';
+                    
+                    // Clear previous villages
+                    villageSelect.innerHTML = '<option value="" selected disabled>Select Village</option>';
+                    
+                    // Add villages based on tehsil and district
+                    if (tehsil !== 'other' && district !== 'other' && 
+                        locationData[district] && locationData[district].villages[tehsil]) {
+                        
+                        locationData[district].villages[tehsil].forEach(village => {
+                            const option = document.createElement('option');
+                            option.value = village.toLowerCase();
+                            option.textContent = village;
+                            villageSelect.appendChild(option);
+                        });
+                    }
+                });
+
+                // Village change event
+                villageSelect.addEventListener('change', function() {
+                    const village = this.value;
+                    document.getElementById('otherVillageContainer').style.display = 
+                        village === 'other' ? 'block' : 'none';
+                });
+
+                // Product other option
+                document.getElementById('productOther').addEventListener('change', function() {
+                    document.getElementById('otherProductContainer').style.display = 
+                        this.checked ? 'block' : 'none';
+                });
+
+                // Form submission
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
                     
                     // Get selected products
                     const products = [];
                     if (document.getElementById('productPaneer').checked) products.push('Paneer');
                     if (document.getElementById('productGhee').checked) products.push('Ghee');
                     if (document.getElementById('productHoney').checked) products.push('Honey');
-                    if (document.getElementById('productRajma').checked) products.push('Rajma');
+                    if (document.getElementById('productMilk').checked) products.push('Milk Products');
+                    if (document.getElementById('productSpices').checked) products.push('Spices');
+                    if (document.getElementById('productPickles').checked) products.push('Pickles');
                     
-                    // In a real application, this data would be sent to Azure
-                    console.log('Seller registration:', { name, phone, district, village, products });
+                    if (document.getElementById('productOther').checked) {
+                        const otherProduct = document.getElementById('otherProduct').value;
+                        if (otherProduct) products.push(otherProduct);
+                    }
+                    
+                    // Get district, tehsil, and village values
+                    let district = districtSelect.value;
+                    if (district === 'other') {
+                        district = document.getElementById('otherDistrict').value;
+                    }
+                    
+                    let tehsil = tehsilSelect.value;
+                    if (tehsil === 'other') {
+                        tehsil = document.getElementById('otherTehsil').value;
+                    }
+                    
+                    let village = villageSelect.value;
+                    if (village === 'other') {
+                        village = document.getElementById('otherVillage').value;
+                    }
+                    
+                    // Get video option
+                    const videoOption = document.querySelector('input[name="videoOption"]:checked').value;
+                    
+                    // Prepare data for Azure Cosmos DB
+                    const sellerData = {
+                        fullName: document.getElementById('fullName').value,
+                        phone: document.getElementById('phone').value,
+                        email: document.getElementById('email').value,
+                        district: district,
+                        tehsil: tehsil,
+                        village: village,
+                        pincode: document.getElementById('pincode').value,
+                        products: products,
+                        videoOption: videoOption,
+                        registrationDate: new Date().toISOString()
+                    };
+                    
+                    // Save to Azure Cosmos DB (simulated)
+                    saveToAzure(sellerData);
                     
                     // Show success message
+                    form.reset();
                     document.getElementById('successMessage').style.display = 'block';
                     
-                    // Reset form
-                    sellerForm.reset();
-                    
-                    // Close modal after 3 seconds
+                    // Scroll to success message
                     setTimeout(() => {
-                        const modal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
-                        modal.hide();
-                    }, 3000);
+                        document.getElementById('successMessage').scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }, 100);
                 });
             }
             
-            // Contact form
-            const contactForm = document.getElementById('contactForm');
+            // Contact form submission
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     
-                    // Get form values
-                    const name = document.getElementById('name').value;
-                    const email = document.getElementById('email').value;
-                    const subject = document.getElementById('subject').value;
-                    const message = document.getElementById('message').value;
+                    const contactData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        subject: document.getElementById('subject').value,
+                        message: document.getElementById('message').value,
+                        date: new Date().toISOString()
+                    };
                     
-                    // In a real application, this data would be sent to Azure
-                    console.log('Contact form submission:', { name, email, subject, message });
+                    // Save to Azure (simulated)
+                    saveToAzure(contactData, 'contacts');
                     
-                    // Show alert
                     alert('Thank you for your message! We will contact you soon.');
-                    
-                    // Reset form
                     contactForm.reset();
                 });
+            }
+            
+            // Add error handling for images
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('error', function() {
+                    this.src = 'https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80';
+                    this.alt = 'Image not available';
+                });
+            });
+            
+            // Simulated Azure save function
+            function saveToAzure(data, collection = 'sellers') {
+                console.log('Saving to Azure Cosmos DB:', collection, data);
+                // In a real implementation, this would use Azure SDK or REST API
+                // to save data to Cosmos DB
+                
+                // For demo purposes, we'll store in local storage
+                const key = `pahadihaat_${collection}_${Date.now()}`;
+                localStorage.setItem(key, JSON.stringify(data));
+                
+                console.log('Data saved with key:', key);
             }
         });
     </script>
